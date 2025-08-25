@@ -168,6 +168,21 @@ export class SuperleeEngine {
   processMessage(message: string, file?: File, aiDetectionResult?: { isAI: boolean; confidence: number }): SuperleeResponse {
     const cleaned = message.trim().toLowerCase();
 
+    // Special responses for easter eggs
+    if (cleaned.includes("who is mushy") || cleaned.includes("mushy")) {
+      return {
+        type: "message",
+        text: "Mushy? Oh, that's the best CM in the world, no doubt. 😎"
+      };
+    }
+
+    if (cleaned === "dimjink") {
+      return {
+        type: "message",
+        text: "anjink 😂"
+      };
+    }
+
     // Special handling for "Continue Registration" with file and AI results
     if (message.toLowerCase().includes("continue registration") && file && aiDetectionResult) {
       // Set up the register data with the provided file and AI results
