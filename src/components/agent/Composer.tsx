@@ -89,24 +89,8 @@ export function Composer({
     }
   }, [messages, isConnected, isTyping]);
 
-  // Auto-focus when greeting message with buttons appears (after "sup")
-  useEffect(() => {
-    if (!messages || messages.length === 0) return;
-
-    const lastMessage = messages[messages.length - 1];
-    if (lastMessage.role === "agent" && lastMessage.buttons && lastMessage.buttons.length > 0) {
-      // Check if this is the greeting message
-      const isGreeting = lastMessage.text.includes("Hey!") || lastMessage.text.includes("What can I help you with?");
-
-      if (isGreeting && textareaRef.current && isConnected && !isTyping) {
-        // Focus after greeting message appears
-        const timer = setTimeout(() => {
-          textareaRef.current?.focus();
-        }, 1200); // Slightly longer delay for greeting
-        return () => clearTimeout(timer);
-      }
-    }
-  }, [messages, isConnected, isTyping]);
+  // Note: Removed auto-focus for greeting message since it has button options
+  // User should choose from buttons, not type in input field
 
   // Preserve focus when user has typed something
   useEffect(() => {
