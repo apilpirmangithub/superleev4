@@ -96,7 +96,7 @@ export function Composer({
     const lastMessage = messages[messages.length - 1];
     if (lastMessage.role === "agent" && lastMessage.buttons && lastMessage.buttons.length > 0) {
       // Check if this is the greeting message
-      const isGreeting = lastMessage.text.includes("Halo!") || lastMessage.text.includes("Senang bertemu");
+      const isGreeting = lastMessage.text.includes("Hello!") || lastMessage.text.includes("Nice to meet you");
 
       if (isGreeting && textareaRef.current && isConnected && !isTyping) {
         // Focus after greeting message appears
