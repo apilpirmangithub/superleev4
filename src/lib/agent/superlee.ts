@@ -196,7 +196,7 @@ export class SuperleeEngine {
         if (message.toLowerCase().includes("continue") || message.toLowerCase().includes("lanjutkan")) {
           return {
             type: "awaiting_input",
-            prompt: "What is the name of your IP?"
+            prompt: "Perfect! What should we call this IP? (Enter a title/name)"
           };
         }
         return this.handleNameInput(message);
