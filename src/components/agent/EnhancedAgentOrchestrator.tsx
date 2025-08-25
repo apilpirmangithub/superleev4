@@ -235,10 +235,23 @@ AI Detected: ${result.aiDetected ? 'Yes' : 'No'} (${((result.aiConfidence || 0) 
     if (buttonText === "Upload File") {
       // Trigger file input
       fileInputRef.current?.click();
+    } else if (buttonText === "Continue Registration") {
+      // Handle continue registration with analyzed file
+      if (analyzedFile && aiDetectionResult) {
+        // Add user message
+        chatAgent.addMessage("you", buttonText);
+
+        // Ask for IP name
+        setTimeout(() => {
+          chatAgent.addMessage("agent", "Great! Let's continue with registration. What should we call this IP?");
+        }, 800);
+      } else {
+        chatAgent.processPrompt(buttonText);
+      }
     } else {
       chatAgent.processPrompt(buttonText);
     }
-  }, [chatAgent]);
+  }, [chatAgent, analyzedFile, aiDetectionResult]);
 
   const handleFileInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
