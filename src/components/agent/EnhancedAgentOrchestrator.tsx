@@ -235,10 +235,13 @@ AI Detected: ${result.aiDetected ? 'Yes' : 'No'} (${((result.aiConfidence || 0) 
     if (buttonText === "Upload File") {
       // Trigger file input
       fileInputRef.current?.click();
+    } else if (buttonText === "Continue Registration") {
+      // Pass the analyzed file and AI detection result when continuing registration
+      chatAgent.processPrompt(buttonText, analyzedFile || undefined, aiDetectionResult);
     } else {
       chatAgent.processPrompt(buttonText);
     }
-  }, [chatAgent]);
+  }, [chatAgent, analyzedFile, aiDetectionResult]);
 
   const handleFileInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
