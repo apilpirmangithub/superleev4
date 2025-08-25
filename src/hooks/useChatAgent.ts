@@ -87,7 +87,19 @@ export function useChatAgent() {
       if (response.type === "message") {
         // Only add message if text is not empty (to handle silent responses)
         if (response.text.trim()) {
-          addMessage("agent", response.text, response.buttons);
+          // If response has image, use addCompleteMessage for full Message object
+          if (response.image) {
+            addCompleteMessage({
+              role: "agent",
+              text: response.text,
+              ts: Date.now(),
+              buttons: response.buttons,
+              image: response.image
+            });
+          } else {
+            // Use regular addMessage for text-only responses
+            addMessage("agent", response.text, response.buttons);
+          }
         }
         setCurrentPlan(null);
         return;
