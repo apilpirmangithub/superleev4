@@ -171,7 +171,7 @@ export function Composer({
 
         {/* Input Area */}
         <div className="relative">
-          <div className="flex items-end gap-2 rounded-2xl ring-1 ring-white/15 bg-white/8 backdrop-blur-md px-3 py-2 overflow-visible transition-smooth hover:ring-white/25 focus-within:ring-sky-400/50 focus-within:ring-2 hover-glow">
+          <div className="flex gap-2 rounded-2xl ring-1 ring-white/15 bg-white/8 backdrop-blur-md px-3 py-2 overflow-visible transition-smooth hover:ring-white/25 focus-within:ring-sky-400/50 focus-within:ring-2 hover-glow flex-row">
 
 
             {/* Textarea */}
