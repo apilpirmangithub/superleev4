@@ -51,8 +51,8 @@ export type RegisterIntent = {
   pilType?: "open_use" | "non_commercial_remix" | "commercial_use" | "commercial_remix";
 };
 
-export type SuperleeResponse = 
-  | { type: "message"; text: string; buttons?: string[] }
+export type SuperleeResponse =
+  | { type: "message"; text: string; buttons?: string[]; image?: { url: string; alt?: string } }
   | { type: "plan"; intent: SwapIntent | RegisterIntent; plan: string[] }
   | { type: "awaiting_file" }
   | { type: "awaiting_input"; prompt: string };
