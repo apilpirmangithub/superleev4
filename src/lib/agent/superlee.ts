@@ -240,7 +240,7 @@ export class SuperleeEngine {
       this.context.state = "greeting";
       return {
         type: "message",
-        text: "Hello! Nice to meet you! 😊\n\nI'm ready to help with whatever you need today. Choose one:",
+        text: "Hey! What can I help you with? 😊",
         buttons: ["Register IP", "Swap Token"]
       };
     }
