@@ -145,6 +145,10 @@ export function useChatAgent() {
     }
   }, []);
 
+  const getEngineFile = useCallback(() => {
+    return superleeEngine.getContext().registerData?.file;
+  }, []);
+
   return {
     messages,
     currentPlan,
@@ -159,5 +163,6 @@ export function useChatAgent() {
     clearPlan,
     updateStatus,
     newChat,
+    getEngineFile,
   };
 }
