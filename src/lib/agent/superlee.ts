@@ -168,6 +168,23 @@ export class SuperleeEngine {
   processMessage(message: string, file?: File, aiDetectionResult?: { isAI: boolean; confidence: number }): SuperleeResponse {
     const cleaned = message.trim().toLowerCase();
 
+    // Special handling for "Continue Registration" with file and AI results
+    if (message.toLowerCase().includes("continue registration") && file && aiDetectionResult) {
+      // Set up the register data with the provided file and AI results
+      this.context.flow = "register";
+      this.context.registerData = {
+        file,
+        aiDetected: aiDetectionResult.isAI,
+        aiConfidence: aiDetectionResult.confidence
+      };
+      this.context.state = "register_awaiting_name";
+
+      return {
+        type: "awaiting_input",
+        prompt: "Perfect! What should we call this IP? (Enter a title/name)"
+      };
+    }
+
     switch (this.context.state) {
       case "awaiting_sup":
         return this.handleSupTrigger(cleaned);
