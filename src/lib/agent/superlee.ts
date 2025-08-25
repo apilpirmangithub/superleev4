@@ -274,7 +274,12 @@ export class SuperleeEngine {
       };
     }
 
-    return this.getGreeting();
+    // If user types something invalid, give warning instead of repeating greeting
+    return {
+      type: "message",
+      text: "⚠️ Don't type randomly. Please choose one of the options above!",
+      buttons: ["Register IP", "Swap Token"]
+    };
   }
 
   private handleFileUpload(file: File, aiResult?: { isAI: boolean; confidence: number }): SuperleeResponse {
