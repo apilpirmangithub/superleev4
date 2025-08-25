@@ -168,23 +168,34 @@ export class SuperleeEngine {
   processMessage(message: string, file?: File, aiDetectionResult?: { isAI: boolean; confidence: number }): SuperleeResponse {
     const cleaned = message.trim().toLowerCase();
 
-    // Special responses for easter eggs
-    if (cleaned.includes("who is mushy") || cleaned.includes("mushy")) {
-      return {
-        type: "message",
-        text: "Mushy? Oh, that's the best CM in the world, no doubt. 😎",
-        image: {
-          url: "https://cdn.builder.io/api/v1/image/assets%2F63395bcf097f453d9ecb84f69d3bcf7c%2F13e4207002674f1985b1c9ba838a17ba?format=webp&width=800",
-          alt: "Mushy - The best CM in the world"
-        }
-      };
-    }
+    // Easter eggs only work in "awaiting_sup" state (before SUP is typed)
+    if (this.context.state === "awaiting_sup") {
+      // Special responses for easter eggs - only when not started yet
+      if (cleaned.includes("who is mushy") || cleaned.includes("mushy")) {
+        return {
+          type: "message",
+          text: "Mushy? Oh, that's the best CM in the world, no doubt. 😎",
+          image: {
+            url: "https://cdn.builder.io/api/v1/image/assets%2F63395bcf097f453d9ecb84f69d3bcf7c%2F13e4207002674f1985b1c9ba838a17ba?format=webp&width=800",
+            alt: "Mushy - The best CM in the world"
+          }
+        };
+      }
 
-    if (cleaned === "dimjink") {
-      return {
-        type: "message",
-        text: "anjink 😂"
-      };
+      if (cleaned === "dimjink") {
+        return {
+          type: "message",
+          text: "anjink 😂"
+        };
+      }
+    } else {
+      // After SUP is typed, easter eggs give warning
+      if (cleaned.includes("who is mushy") || cleaned.includes("mushy") || cleaned === "dimjink") {
+        return {
+          type: "message",
+          text: "⚠️ Don't type randomly. Please follow the conversation flow!"
+        };
+      }
     }
 
     // Special handling for "Continue Registration" with file and AI results
