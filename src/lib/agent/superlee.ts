@@ -52,7 +52,7 @@ export type RegisterIntent = {
 };
 
 export type SuperleeResponse =
-  | { type: "message"; text: string; buttons?: string[]; image?: { url: string; alt?: string } }
+  | { type: "message"; text: string; buttons?: string[]; image?: { url: string; alt?: string }; links?: { text: string; url: string }[] }
   | { type: "plan"; intent: SwapIntent | RegisterIntent; plan: string[] }
   | { type: "awaiting_file" }
   | { type: "awaiting_input"; prompt: string };
