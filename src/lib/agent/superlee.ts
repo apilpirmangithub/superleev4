@@ -172,7 +172,11 @@ export class SuperleeEngine {
     if (cleaned.includes("who is mushy") || cleaned.includes("mushy")) {
       return {
         type: "message",
-        text: "Mushy? Oh, that's the best CM in the world, no doubt. 😎"
+        text: "Mushy? Oh, that's the best CM in the world, no doubt. 😎",
+        image: {
+          url: "https://cdn.builder.io/api/v1/image/assets%2F63395bcf097f453d9ecb84f69d3bcf7c%2F13e4207002674f1985b1c9ba838a17ba?format=webp&width=800",
+          alt: "Mushy - The best CM in the world"
+        }
       };
     }
 
