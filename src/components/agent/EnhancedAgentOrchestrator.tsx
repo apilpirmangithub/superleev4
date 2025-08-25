@@ -142,7 +142,10 @@ Tx: ${result.txHash}
     }
     
     else if (plan.type === "register" && plan.intent.kind === "register") {
-      if (!analyzedFile) {
+      // Get file from engine context or fallback to analyzed file
+      const fileToUse = chatAgent.getEngineFile() || analyzedFile;
+
+      if (!fileToUse) {
         chatAgent.addMessage("agent", "❌ Please attach an image first!");
         setToast("Attach image first 📎");
         return;
@@ -156,7 +159,7 @@ Tx: ${result.txHash}
         pilType: plan.intent.pilType || DEFAULT_LICENSE_SETTINGS.pilType,
       };
 
-      const result = await registerAgent.executeRegister(plan.intent, analyzedFile, licenseSettings);
+      const result = await registerAgent.executeRegister(plan.intent, fileToUse, licenseSettings);
       
       if (result.success) {
         // Show initial success with transaction link
