@@ -168,22 +168,22 @@ export class SuperleeEngine {
   processMessage(message: string, file?: File, aiDetectionResult?: { isAI: boolean; confidence: number }): SuperleeResponse {
     const cleaned = message.trim().toLowerCase();
 
-    // Special response for superlee token - works in any state
-    if (cleaned.includes("superlee token") || cleaned.includes("token superlee")) {
-      return {
-        type: "message",
-        text: "🪙 Looking for Superlee token info? Check it out here:",
-        links: [
-          {
-            text: "View Superlee Token",
-            url: "https://ip.world/token/0x53b3Cd3035feCa127172b84DC5B72a6ca9b9AAb9"
-          }
-        ]
-      };
-    }
-
     // Easter eggs only work in "awaiting_sup" state (before SUP is typed)
     if (this.context.state === "awaiting_sup") {
+      // Special response for superlee token - only when not started yet
+      if (cleaned.includes("superlee token") || cleaned.includes("token superlee")) {
+        return {
+          type: "message",
+          text: "🪙 Looking for Superlee token info? Check it out here:",
+          links: [
+            {
+              text: "View Superlee Token",
+              url: "https://ip.world/token/0x53b3Cd3035feCa127172b84DC5B72a6ca9b9AAb9"
+            }
+          ]
+        };
+      }
+
       // Special responses for easter eggs - only when not started yet
       if (cleaned.includes("who is mushy") || cleaned.includes("mushy")) {
         return {
@@ -204,7 +204,7 @@ export class SuperleeEngine {
       }
     } else {
       // After SUP is typed, easter eggs give warning
-      if (cleaned.includes("who is mushy") || cleaned.includes("mushy") || cleaned === "dimjink") {
+      if (cleaned.includes("who is mushy") || cleaned.includes("mushy") || cleaned === "dimjink" || cleaned.includes("superlee token") || cleaned.includes("token superlee")) {
         return {
           type: "message",
           text: "⚠️ Don't type randomly. Please follow the conversation flow!"
