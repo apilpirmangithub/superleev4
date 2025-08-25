@@ -245,10 +245,10 @@ export class SuperleeEngine {
       };
     }
 
-    // If user types anything other than "SUP", stay silent
+    // If user types anything other than "SUP", give warning
     return {
       type: "message",
-      text: "" // Empty response to stay silent
+      text: "⚠️ Don't type randomly. Just type \"SUP\" to start!"
     };
   }
 
