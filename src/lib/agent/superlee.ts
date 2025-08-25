@@ -231,7 +231,10 @@ export class SuperleeEngine {
         return this.handleAmountInput(message);
 
       default:
-        return this.getGreeting();
+        return {
+          type: "message",
+          text: "⚠️ Don't type randomly. Please follow the instructions!"
+        };
     }
   }
 
